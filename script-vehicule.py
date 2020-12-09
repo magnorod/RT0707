@@ -104,6 +104,7 @@ if __name__ == '__main__' :
     stationId=gen_stationId()
     stationType_tab=(5,10,15)
     ip_server_mqtt="10.22.135.34"
+    frequence=0
 
     while True :
 
@@ -118,19 +119,28 @@ if __name__ == '__main__' :
         latitude=random.uniform(0,100)
 
         # génération vitesse
-        vitesse = random.randint(0,130)
+
+        if stationId == 2 :
+            vitesse = random.randint(90,130)
+        elif stationId == 3:
+            vitesse = random.randint(0,90)
+        else:
+            vitesse = random.randint(0,130)
+        #endif
+
+        if vitesse < 90 :
+            frequence=1
+        else:
+            frequence=0.100
+        #endif
 
         # génération msg cam
         msg_cam = gen_msg_cam(stationId,stationType,longitude,latitude,vitesse,ip_server_mqtt)
         msg_denm = gen_msg_denm(stationId,stationType,longitude,latitude,vitesse,ip_server_mqtt)
     
+        print("envoi à une fréquence de "+str(frequence))
         print(msg_cam)
-        time.sleep(10)
-
-  
-        #print("msg_cam:"+str(msg_cam))
-        #print("msg_denm:"+str(msg_denm))
-    
+        time.sleep(frequence)
     #end
 
    
