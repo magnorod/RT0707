@@ -10,6 +10,9 @@ compteur:
 
 nb_voiture_arret
 nb_voiture_embouteillage
+nb_voiture_brouillard
+nb_voiture_travaux
+nb_voiture_route_glissante
 
 while true:
 
@@ -39,6 +42,25 @@ SI vehicule.vitesse <= 30 Alors
     Si nb_voiture_embouteillage == 3 Alors
         envoyer(evenement_embouteillage)
 FinSi
+
+
+# Gestion brouillard
+
+Si vehicule.cause = 7 Alors
+    nb_voiture_brouillard ++ 
+    afficher (brouillard en cours)
+
+# Gestion travaux
+
+Si vehicule.cause = 3 Alors
+    nb_voiture_travaux ++ 
+    afficher (travaux en cours)
+
+# Gestion travaux
+
+Si vehicule.cause = 6 Alors
+    nb_voiture_route_glissante ++ 
+    afficher (route glissante  en cours)
 
 
 

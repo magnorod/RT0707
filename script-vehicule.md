@@ -1,4 +1,4 @@
-## Debrief script (éhicule)
+## Debrief script (véhicule)
 
 1) générer un message CAM sous forme json:
 
@@ -19,12 +19,23 @@ message CAM
     ]
 }
 
-2) génération du message DNEM en fonction du message CAM
+2) génération du message DENM en fonction du message CAM
 
-message DNEM
+message DENM
+
 {
+    
+
     "stationId": messageCAM.stationId
     "stationType": messageCAM.station
+    SI stationType == 15 && que messageCAM.vitesse == 0 Alors
+        #accident
+        cause=4
+
+    SI stationType = 15 && vitesse <= 30
+        #embouteillage
+        cause=5
+
     "cause": random(3,4,5,6,7)
     "sub-cause": random(1-10)
     "positionGPS":[
